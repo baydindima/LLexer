@@ -45,6 +45,8 @@ public class IfStatement implements Statement {
                 return thenExpression.tryResolve();
             }
         }
+        elseExpression.tryResolve();
+        thenExpression.tryResolve();
         return this;
     }
 }

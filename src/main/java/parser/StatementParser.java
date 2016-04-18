@@ -71,7 +71,7 @@ public class StatementParser {
     }
 
     static final Parser<Void> IGNORED =
-            Parsers.sequence(Scanners.WHITESPACES).skipMany();
+            Parsers.or(Scanners.WHITESPACES, Scanners.JAVA_LINE_COMMENT).skipMany();
 
     public static final Parser<Statement> SEQ_STATEMENT = Parsers.or(STATEMENT)
             .infixl(Mapper.<Statement>curry(SequenceStatement.class).infix(token(";")));

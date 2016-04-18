@@ -1,0 +1,52 @@
+// Optimizations
+// Calculation
+a := 2 + 2 * 2 ;
+a := 12 / ((2 + 2) * 2);
+
+//And Zero
+a := 0 && 1;
+a := 1 && 0;
+
+//Or Zero
+a := 0 || 1;
+a := 1 || 0;
+
+// Zero Mult
+a := x * 0;
+a := 0 * x;
+
+// One Mult
+a := x * 1;
+a := 1 * x;
+
+// Zero Sum
+a := x + 0;
+a := 0 + x;
+
+// Div Zero
+a := 0 / x;
+a := 0 % x;
+
+//Scoped
+x := (((x)));
+
+
+// if false
+if 0 then
+ read false
+else
+ read true;
+
+// While true
+while 1 do
+ read true;
+
+// if true
+if 1 then
+ // While false
+ while 0 do
+  read false
+else
+ read false
+
+

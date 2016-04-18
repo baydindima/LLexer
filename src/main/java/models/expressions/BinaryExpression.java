@@ -31,7 +31,7 @@ public class BinaryExpression implements Expression {
         if (left instanceof NumberExpression) {
             NumberExpression number = (NumberExpression) left;
             if (number.value == 0) {
-                if (Operator.isZeroThanZero(operator)) {
+                if (Operator.isLeftZeroThanZero(operator)) {
                     return new NumberExpression("0");
                 }
                 if (Operator.isZeroThanRemove(operator)) {
@@ -40,6 +40,9 @@ public class BinaryExpression implements Expression {
             } else {
                 if (Operator.isNonZeroThanNonZero(operator)) {
                     return left;
+                }
+                if (number.value == 1 && Operator.isOneThanRemove(operator)) {
+                    return right.tryResolve();
                 }
             }
         }
@@ -53,9 +56,15 @@ public class BinaryExpression implements Expression {
                 if (Operator.isZeroThanRemove(operator)) {
                     return left;
                 }
+                if (Operator.isRightZeroThanWrong(operator)) {
+                    throw new ArithmeticException("Divide by Zero!");
+                }
             } else {
                 if (Operator.isNonZeroThanNonZero(operator)) {
                     return right;
+                }
+                if (number.value == 1 && Operator.isRightOneThanRemove(operator)) {
+                    return left;
                 }
             }
         }

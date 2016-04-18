@@ -1,10 +1,7 @@
 package parser;
 
 import models.*;
-import models.expressions.BinaryExpression;
-import models.expressions.Expression;
-import models.expressions.NumberExpression;
-import models.expressions.VariableExpression;
+import models.expressions.*;
 import org.codehaus.jparsec.OperatorTable;
 import org.codehaus.jparsec.Parser;
 import org.codehaus.jparsec.Parser.Reference;
@@ -23,9 +20,15 @@ public class ExpressionParser {
 
     static final Parser<Expression> NUMBER = curry(NumberExpression.class).sequence(Terminals.DecimalLiteral.PARSER);
 
-    static <T> Parser<T> paren(Parser<T> parser) {
-        return parser.between(term("("), term(")"));
-    }
+    static final Parser<Expression> SCOPED = curry(ScopedExpression.class).sequence(
+            term("("),
+            EXPRESSION_REFERENCE.lazy(),
+            term(")")
+    );
+
+//    static <T> Parser<T> paren(Parser<T> parser) {
+//        return parser.between(term("("), term(")"));
+//    }
 
     static Parser<Expression> expression(Parser<Expression> cond) {
         Reference<Expression> reference = Parser.newReference();
@@ -52,7 +55,7 @@ public class ExpressionParser {
                 .infixl(binary("!=", Operator.NE), 10)
                 .infixl(binary("&&", Operator.AND), 20)
                 .infixl(binary("||", Operator.OR), 10)
-                .build(paren(reference.lazy()).or(atom)).label("arithmetic expression");
+                .build(SCOPED.or(atom)).label("arithmetic expression");
         reference.set(parser);
         return parser;
     }

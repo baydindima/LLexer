@@ -20,7 +20,7 @@ public class SequenceStatement implements Statement {
 
     @Override
     public void printProgram(int offset) {
-        System.out.println(String.format("%" + (offset * 3) + "s %s;", "", leftExpression));
+        leftExpression.printProgram(offset);
         rightExpression.printProgram(offset);
     }
 
