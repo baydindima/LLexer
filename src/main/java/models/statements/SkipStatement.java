@@ -23,4 +23,10 @@ public class SkipStatement implements Statement {
     public void printTree(int offset) {
         System.out.println(String.format("%" + (offset * 3) + "s %s", "", "SkipStatement"));
     }
+
+    @Override
+    public Statement tryResolve() {
+        return this;
+    }
+
 }

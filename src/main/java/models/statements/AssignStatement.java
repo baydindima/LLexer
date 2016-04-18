@@ -5,7 +5,7 @@ import models.expressions.VariableExpression;
 
 public class AssignStatement implements Statement {
     private final VariableExpression value;
-    private final Expression expression;
+    private Expression expression;
 
     public AssignStatement(VariableExpression value, Expression expression) {
         this.value = value;
@@ -27,5 +27,11 @@ public class AssignStatement implements Statement {
         System.out.println(String.format("%" + (offset * 3) + "s %s", "", "AssignStatement"));
         value.printTree(offset + 1);
         expression.printTree(offset + 1);
+    }
+
+    @Override
+    public Statement tryResolve() {
+        expression = expression.tryResolve();
+        return this;
     }
 }

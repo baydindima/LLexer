@@ -8,6 +8,9 @@ public class Main {
         program.printTree();
         System.out.println("Program printer:");
         program.printProgram();
+        program.tryResolve();
+        System.out.println("Simplified program:");
+        program.printProgram();
     }
 
 }

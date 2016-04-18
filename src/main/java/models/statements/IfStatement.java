@@ -1,9 +1,10 @@
 package models.statements;
 
 import models.expressions.Expression;
+import models.expressions.NumberExpression;
 
 public class IfStatement implements Statement {
-    private final Expression condition;
+    private Expression condition;
     private final Statement thenExpression;
     private final Statement elseExpression;
 
@@ -31,5 +32,19 @@ public class IfStatement implements Statement {
         System.out.println(String.format("%" + (offset * 3) + "s %s", "", "IfStatement"));
         thenExpression.printTree(offset + 1);
         elseExpression.printTree(offset + 1);
+    }
+
+    @Override
+    public Statement tryResolve() {
+        condition = condition.tryResolve();
+        if (condition instanceof NumberExpression) {
+            NumberExpression condition = (NumberExpression) this.condition;
+            if (condition.value == 0) {
+                return elseExpression.tryResolve();
+            } else {
+                return thenExpression.tryResolve();
+            }
+        }
+        return this;
     }
 }

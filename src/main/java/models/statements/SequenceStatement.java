@@ -3,9 +3,9 @@ package models.statements;
 import org.codehaus.jparsec.Token;
 
 public class SequenceStatement implements Statement {
-    private final Statement leftExpression;
+    private Statement leftExpression;
     private final String col;
-    private final Statement rightExpression;
+    private Statement rightExpression;
 
     public SequenceStatement(Statement leftExpression, Token col, Statement rightExpression) {
         this.leftExpression = leftExpression;
@@ -29,5 +29,12 @@ public class SequenceStatement implements Statement {
         System.out.println(String.format("%" + (offset * 3) + "s %s", "", "SequenceStatement"));
         leftExpression.printTree(offset + 1);
         rightExpression.printTree(offset + 1);
+    }
+
+    @Override
+    public Statement tryResolve() {
+        leftExpression = leftExpression.tryResolve();
+        rightExpression = rightExpression.tryResolve();
+        return this;
     }
 }

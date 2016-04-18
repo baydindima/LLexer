@@ -3,7 +3,7 @@ package models;
 import models.statements.Statement;
 
 public class Program {
-    private final Statement statement;
+    private Statement statement;
 
     public Program(Statement statement) {
         this.statement = statement;
@@ -15,6 +15,10 @@ public class Program {
 
     public void printTree() {
         statement.printTree(1);
+    }
+
+    public void tryResolve() {
+        statement = statement.tryResolve();
     }
 
 }
