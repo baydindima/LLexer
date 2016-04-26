@@ -18,8 +18,8 @@ public class AssignStatement implements Statement {
     }
 
     @Override
-    public void printProgram(int offset) {
-        System.out.println(String.format("%" + (offset * 3) + "s %s := %s", "", value, expression));
+    public void printProgram(int offset, StringBuilder builder) {
+        builder.append(String.format("%" + (offset * 3) + "s %s := %s", "", value, expression));
     }
 
     @Override

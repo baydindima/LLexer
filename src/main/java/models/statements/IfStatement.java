@@ -20,16 +20,17 @@ public class IfStatement implements Statement {
     }
 
     @Override
-    public void printProgram(int offset) {
-        System.out.println(String.format("%" + (offset * 3) + "s if %s then", "", condition));
-        thenExpression.printProgram(offset + 1);
-        System.out.println(String.format("%" + (offset * 3) + "s else", ""));
-        elseExpression.printProgram(offset + 1);
+    public void printProgram(int offset, StringBuilder builder) {
+        builder.append(String.format("%" + (offset * 3) + "s if %s then", "", condition)).append("\n");
+        thenExpression.printProgram(offset + 1, builder);
+        builder.append("\n").append(String.format("%" + (offset * 3) + "s else", "")).append("\n");
+        elseExpression.printProgram(offset + 1, builder);
     }
 
     @Override
     public void printTree(int offset) {
         System.out.println(String.format("%" + (offset * 3) + "s %s", "", "IfStatement"));
+        condition.printTree(offset + 1);
         thenExpression.printTree(offset + 1);
         elseExpression.printTree(offset + 1);
     }

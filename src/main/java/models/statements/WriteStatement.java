@@ -15,8 +15,8 @@ public class WriteStatement implements Statement{
     }
 
     @Override
-    public void printProgram(int offset) {
-        System.out.println(String.format("%" + (offset * 3) + "s write %s", "", expression));
+    public void printProgram(int offset, StringBuilder builder) {
+        builder.append(String.format("%" + (offset * 3) + "s write %s", "", expression));
     }
 
     @Override

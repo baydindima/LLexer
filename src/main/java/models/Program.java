@@ -10,7 +10,10 @@ public class Program {
     }
 
     public void printProgram() {
-        statement.printProgram(1);
+        StringBuilder builder = new StringBuilder();
+        statement.printProgram(1, builder);
+        builder.append("\n");
+        System.out.println(builder.toString());
     }
 
     public void printTree() {

@@ -19,9 +19,10 @@ public class SequenceStatement implements Statement {
     }
 
     @Override
-    public void printProgram(int offset) {
-        leftExpression.printProgram(offset);
-        rightExpression.printProgram(offset);
+    public void printProgram(int offset, StringBuilder builder) {
+        leftExpression.printProgram(offset, builder);
+        builder.append(";\n");
+        rightExpression.printProgram(offset, builder);
     }
 
     @Override

@@ -20,9 +20,9 @@ public class WhileStatement implements Statement {
     }
 
     @Override
-    public void printProgram(int offset) {
-        System.out.println(String.format("%" + (offset * 3) + "s while %s do", "", condition));
-        statement.printProgram(offset + 1);
+    public void printProgram(int offset, StringBuilder builder) {
+        builder.append(String.format("%" + (offset * 3) + "s while %s do", "", condition)).append("\n");
+        statement.printProgram(offset + 1, builder);
     }
 
 

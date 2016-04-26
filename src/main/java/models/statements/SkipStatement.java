@@ -15,8 +15,8 @@ public class SkipStatement implements Statement {
     }
 
     @Override
-    public void printProgram(int offset) {
-        System.out.println(String.format("%" + (offset * 3) + "s %s", "", toString()));
+    public void printProgram(int offset, StringBuilder builder) {
+        builder.append(String.format("%" + (offset * 3) + "s %s", "", toString()));
     }
 
     @Override
